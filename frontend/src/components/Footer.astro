@@ -1,0 +1,45 @@
+---
+const currentYear = new Date().getFullYear();
+import { Icon } from "astro-icon/components";
+---
+
+<footer class="py-10 border-t border-white/10">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div>
+        <p class="text-gray-400 text-sm">
+          &copy; {currentYear} Full Stack Developer. Todos los derechos reservados.
+        </p>
+      </div>
+
+      <div class="mt-4 md:mt-0">
+        <a
+          href="#inicio"
+          class="scroll-top flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+        >
+          <span class="text-sm">Volver arriba</span>
+          <Icon name="arrow" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Scroll to top animation
+  const scrollTopBtn = document.querySelector(".scroll-top");
+
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: { y: 0, autoKill: false },
+        ease: "power3.inOut",
+      });
+    });
+  }
+</script>

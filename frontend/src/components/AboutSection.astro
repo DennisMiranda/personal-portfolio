@@ -1,0 +1,177 @@
+---
+import { Icon } from "astro-icon/components";
+import SkillCard from "./SkillCard.astro";
+
+const technologies = [
+  { name: "Astro", category: "frontend" },
+  { name: "Bootstrap", category: "frontend" },
+  { name: "JavaScript", category: "frontend" },
+  { name: "C++", category: "frontend" },
+  { name: "HTML5 & CSS3", category: "frontend" },
+  { name: "Tailwind CSS", category: "frontend" },
+  { name: "SQLServer", category: "database" },
+  { name: "PostgreSQL", category: "database" },
+  { name: "Git", category: "tools" },
+  { name: "Github", category: "tools" },
+  { name: "Node.js", category: "backend" },
+  { name: "Express", category: "backend" },
+  { name: "RESTful APIs", category: "backend" },
+  { name: "Next", category: "backend" },
+];
+
+const specialties = [
+  {
+    title: "Frontend",
+    description:
+      "Interfaces modernas y responsivas con Astro y Tailwind CSS que ofrecen experiencias de usuario excepcionales.",
+    icon: "frontend",
+  },
+  {
+    title: "Backend",
+    description:
+      "APIs robustas y escalables con Node.js, Express y arquitecturas RESTful.",
+    icon: "backend",
+  },
+  {
+    title: "Base de Datos",
+    description:
+      "Diseño e implementación de soluciones de datos con PostgreSQL y estrategias de caching.",
+    icon: "database",
+  },
+  {
+    title: "Web Moderna",
+    description:
+      "Aplicaciones web progresivas con enfoque en rendimiento, accesibilidad y experiencia de usuario.",
+    icon: "web",
+  },
+];
+---
+
+<section id="about" class="py-24 bg-dark-secondary/30">
+  <div class="container mx-auto px-4">
+    <h2 class="section-title text-center mb-16">
+      Sobre <span class="text-pastel-blue">Mí</span>
+    </h2>
+
+    <div id="container-about" class="flex flex-col lg:flex-row gap-12">
+      <div class="lg:w-1/2">
+        <div class="about-text">
+          <h3 class="text-2xl font-spaceGrotesk font-bold mb-6">
+            Desarrolladora Full Stack con pasión por crear experiencias
+            digitales
+          </h3>
+          <div class="space-y-4 text-gray-300">
+            <p>
+              Desarrolladora Full Stack con experiencia en sitios web modernos,
+              priorizando rendimiento, diseño y experiencia de usuario. Me
+              especializo en crear soluciones completas, desde la interfaz hasta
+              la lógica del servidor.
+            </p>
+            <p>
+              Apasionada por la tecnología, me mantengo actualizada con nuevas
+              tendencias y mejores prácticas para aportar valor en cada
+              proyecto.
+            </p>
+          </div>
+        </div>
+
+        <!-- Tecnologias  -->
+        <div class="mt-8 tech-container">
+          <h4 class="font-spaceGrotesk font-bold text-xl mb-4">Tecnologías</h4>
+          <div class="flex flex-wrap gap-2">
+            {
+              technologies.map((tech, index) => (
+                <span
+                  class={`px-3 py-1 rounded-full text-sm tech-pill ${
+                    tech.category === "frontend"
+                      ? "bg-pastel-pink/20 text-pastel-pink"
+                      : tech.category === "backend"
+                        ? "bg-pastel-blue/20 text-pastel-blue"
+                        : tech.category === "database"
+                          ? "bg-pastel-green/20 text-pastel-green"
+                          : "bg-pastel-beige/20 text-pastel-beige"
+                  }`}
+                >
+                  {tech.name}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      <!-- Especialidades -->
+      <div class="lg:w-1/2 about-specialties">
+        <h3 class="text-2xl font-spaceGrotesk font-bold mb-6">
+          Mis Especialidades
+        </h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 specialty-cards">
+          {
+            specialties.map(({ title, description, icon }) => (
+              <SkillCard title={title} description={description} icon={icon} />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // About section animations
+  gsap.from(".about-text", {
+    scrollTrigger: {
+      trigger: "#about",
+      start: "top 70%",
+      end: "bottom bottom",
+      toggleActions: "play none none none",
+    },
+    x: -50,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+  });
+
+  gsap.from(".about-specialties h3", {
+    scrollTrigger: {
+      trigger: ".about-specialties",
+      start: "top 70%",
+      toggleActions: "play none none none",
+    },
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    ease: "back.out(1.7)",
+  });
+
+  gsap.from(".specialty-card", {
+    scrollTrigger: {
+      trigger: ".specialty-cards",
+      start: "top 70%",
+      toggleActions: "play none none none",
+    },
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power3.out",
+  });
+
+  gsap.from(".tech-pill", {
+    scrollTrigger: {
+      trigger: ".tech-container",
+      start: "top 80%",
+      toggleActions: "play none none none",
+    },
+    scale: 0.8,
+    opacity: 0,
+    duration: 0.5,
+    stagger: 0.05,
+    ease: "back.out(1.7)",
+  });
+</script>

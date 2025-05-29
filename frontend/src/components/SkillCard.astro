@@ -1,0 +1,16 @@
+---
+import { Icon } from "astro-icon/components";
+
+const { title, description, icon } = Astro.props;
+---
+
+<div class="glass-panel p-6 specialty-card">
+  <div class="flex items-center mb-4 gap-2">
+    <Icon class="text-xl" name={icon} />
+
+    <h4 class="font-spaceGrotesk font-bold text-xl">{title}</h4>
+  </div>
+  <p class="text-gray-400">
+    {description}
+  </p>
+</div>

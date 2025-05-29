@@ -1,0 +1,161 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+
+import aromaImg from "../../assets/aroma-ecommerce.png";
+import aromaAdminImg from "../../assets/aroma-admin.png";
+
+const projects = [
+  {
+    title: "Simulación de Loteria",
+    description:
+      "Este proyecto simula la lotería Tinka en C++, permitiendo a los usuarios seleccionar números y buscar coincidencias. También utiliza análisis estadístico para priorizar los números según su frecuencia histórica.",
+    image:
+      "https://dennismiranda.github.io/Portfolio-Project/profiles/dennis/images/Projects/lotery%20.webp",
+    technologies: ["C++"],
+    demoUrl: null,
+    repoUrl: "https://github.com/DennisMiranda/Lottery-Simulation-cpp",
+    color: "blue",
+  },
+  {
+    title: "Calendario de Adviento",
+    description:
+      "Este calendario de Adviento en C++ ofrece una experiencia diaria única, que incluye una calculadora de presupuesto para dulces navideños el día 15 y copos de nieve festivos con asteriscos el día 24.",
+    image:
+      "https://dennismiranda.github.io/Portfolio-Project/profiles/dennis/images/Projects/adventcalendar.gif",
+    technologies: ["C++"],
+    demoUrl: null,
+    repoUrl: "https://github.com/DennisMiranda/Advent-Calendar-Cpp",
+    color: "blue",
+  },
+  {
+    title: "Juego de la Vida",
+    description:
+      "Este proyecto de C++ es una simulación del Juego de la Vida de Conway. Modela autómatas celulares donde las células viven, mueren o se reproducen según un conjunto de reglas.",
+    image:
+      "https://dennismiranda.github.io/Portfolio-Project/profiles/dennis/images/Projects/Gameoflife.gif",
+    technologies: ["C++"],
+    demoUrl: null,
+    repoUrl: "https://github.com/DennisMiranda/game-of-life",
+    color: "blue",
+  },
+  {
+    title: "Portafolio personal",
+    description:
+      "Este portafolio personal, creado con HTML, CSS y JavaScript, muestra mis habilidades, proyectos e información de contacto a través de un diseño interactivo.",
+    image:
+      "https://dennismiranda.github.io/Portfolio-Project/profiles/dennis/images/Projects/portfolio.gif",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    demoUrl:
+      "https://dennismiranda.github.io/Portfolio-Project/profiles/dennis/index.html",
+    repoUrl: "https://github.com/DennisMiranda/Portfolio-Project",
+    color: "blue",
+  },
+  {
+    title: "Dashboard de Finanzas Personales",
+    description:
+      "Este es un Dashboard que permite a los usuarios gestionar su presupuesto, seguir sus gastos e ingresos, y visualizar gráficos interactivos utilizando AG Grid y Chart.js.",
+    url: "https://github.com/DennisMiranda/personal-finance-dashboard.git",
+    image:
+      "https://github.com/DennisMiranda/personal-finance-dashboard/raw/main/src/assets/img/readme/readmeDashboard.png",
+    technologies: ["HTML", "CSS", "JavaScript", "AG Grid", "Chart.js"],
+    demoUrl: null,
+    repoUrl: "https://github.com/DennisMiranda/personal-finance-dashboard.git",
+    color: "blue",
+  },
+  {
+    title: "Aroma E-Commerce",
+    description:
+      "Proyecto para la venta de productos de belleza en línea de una forma intuitiva y amigable.",
+    url: "https://github.com/DennisMiranda/personal-finance-dashboard.git",
+    image: aromaImg.src,
+    technologies: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Astro",
+      "REST API",
+      "Node.js",
+      "Express",
+      "JWT",
+      "SQL",
+    ],
+    demoUrl: null,
+    repoUrl: "https://github.com/DennisMiranda/personal-finance-dashboard.git",
+    color: "blue",
+  },
+  {
+    title: "Aroma E-Commerce - Módulo Administrador",
+    description:
+      "Proyecto para la gestión del e-commerce. Se destaca por la facilidad para administrar los productos que se muestran y se ocultan en la aplicación del e-commerce.S",
+    url: "https://github.com/DennisMiranda/personal-finance-dashboard.git",
+    image: aromaAdminImg.src,
+    technologies: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Astro",
+      "AG Grid",
+      "REST API",
+      "Node.js",
+      "Express",
+      "JWT",
+      "SQL",
+    ],
+    demoUrl: null,
+    repoUrl: "https://github.com/DennisMiranda/personal-finance-dashboard.git",
+    color: "blue",
+  },
+];
+---
+
+<section id="projects" class="py-24 overflow-x-hidden">
+  <div id="projects-wrapper" class="container mx-auto px-4">
+    <h2 class="section-title text-center mb-16">
+      Mis <span class="text-pastel-pink">Proyectos</span>
+    </h2>
+
+    <div class="flex flex-nowrap w-fit mx-auto projects-container">
+      {
+        projects.map((project) => (
+          <ProjectCard
+            class="w-screen md:w-150 rounded-none mr-6"
+            {...project}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const projectsWrapper = document.querySelector("#projects-wrapper");
+  const projectsContainer = document.querySelector(".projects-container");
+
+  function getScrollAmount() {
+    let containerWidth = projectsContainer.scrollWidth;
+    return -(containerWidth - projectsWrapper.offsetWidth);
+  }
+
+  // Project cards animation
+  const horizontalAnimation = gsap.to(projectsContainer, {
+    x: getScrollAmount,
+    duration: 3,
+    ease: "none",
+  });
+
+  ScrollTrigger.create({
+    trigger: "#projects",
+    start: "top 10%",
+    end: () => `+=${getScrollAmount() * -1}`,
+    animation: horizontalAnimation,
+    pin: true, // Para que la sección sea estática mientras realiza el scroll.
+    scrub: 1,
+    markers: false, // Si es verdadero muestra indicadores de ayuda en la pantalla.
+    invalidateOnRefresh: true,
+  });
+</script>

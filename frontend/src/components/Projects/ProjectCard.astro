@@ -1,0 +1,92 @@
+---
+import { Icon } from "astro-icon/components";
+
+const {
+  class: className,
+  color,
+  demoUrl,
+  description,
+  image,
+  repoUrl,
+  technologies,
+  title,
+} = Astro.props;
+---
+
+<div
+  class:list={[className || "", "glass-panel overflow-hidden", "project-card"]}
+  data-color={color}
+>
+  <div class="relative h-64 overflow-hidden">
+    <div
+      class={`flex justify-center items-center w-full h-full ${
+        color === "blue"
+          ? "bg-pastel-blue/20 text-pastel-blue"
+          : color === "pink"
+            ? "bg-pastel-pink/20 text-pastel-pink"
+            : "bg-pastel-green/20 text-pastel-green"
+      }`}
+    >
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-fit transition-transform duration-700 hover:scale-105 rounded-lg object-contain"
+      />
+    </div>
+
+    <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent">
+    </div>
+  </div>
+  <div class="px-6 pt-6">
+    <h3 class="text-2xl font-spaceGrotesk font-bold mb-2">
+      {title}
+    </h3>
+  </div>
+
+  <div class="p-6">
+    <p class="text-gray-300 mb-6">{description}</p>
+
+    <div class="flex flex-wrap gap-2 mb-6">
+      {
+        technologies.map((tech) => (
+          <span
+            class={`px-3 py-1 rounded-full text-xs ${
+              color === "blue"
+                ? "bg-pastel-blue/20 text-pastel-blue"
+                : color === "pink"
+                  ? "bg-pastel-pink/20 text-pastel-pink"
+                  : "bg-pastel-green/20 text-pastel-green"
+            }`}
+          >
+            {tech}
+          </span>
+        ))
+      }
+    </div>
+
+    <div class="flex gap-4 justify-between">
+      <a
+        href={repoUrl}
+        class="flex items-center gap-2 px-4 py-2 transition-colors duration-300 font-medium"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="github" />
+        <span>Código</span>
+      </a>
+      {
+        demoUrl && (
+          <a
+            href={demoUrl}
+            class="flex items-center gap-2 px-4 py-2 transition-colors duration-300 font-medium"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="demo" />
+            <span>Demo</span>
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

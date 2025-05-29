@@ -1,0 +1,90 @@
+---
+const navItems = [
+  { title: "Inicio", href: "#hero" },
+  { title: "Sobre mí", href: "#about" },
+  { title: "Proyectos", href: "#projects" },
+  { title: "Contacto", href: "#contact" },
+];
+---
+
+<header
+  id="navbar"
+  class="fixed top-0 left-0 right-0 z-50 py-6 transition-all duration-300"
+>
+  <div class="container mx-auto px-4 flex justify-between items-center">
+    <a href="#hero" class="text-xl font-spaceGrotesk font-bold text-white">
+      <span class="text-pastel-blue">{"{"}</span> D&M Soft <span
+        class="text-pastel-pink">{"}"}</span
+      >
+    </a>
+    <nav>
+      <ul class="flex space-x-6">
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href} class="nav-link" data-nav-link>
+                {item.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Navbar scroll effect
+  const navbar = document.querySelector("#navbar");
+
+  gsap.to(navbar, {
+    scrollTrigger: {
+      trigger: "body",
+      start: "top top",
+      end: "50 top",
+      toggleActions: "play none none reverse",
+      onEnter: () =>
+        navbar.classList.add("bg-dark/70", "backdrop-blur-md", "py-4"),
+      onLeave: () => {},
+      onEnterBack: () => {},
+      onLeaveBack: () =>
+        navbar.classList.remove("bg-dark/70", "backdrop-blur-md", "py-4"),
+    },
+  });
+
+  // Active nav link tracking
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll("[data-nav-link]");
+
+  function setActiveLink() {
+    let currentSection = "hero";
+
+    sections.forEach((section) => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const sectionTop = section.getBoundingClientRect().top + scrollTop - 100;
+      const sectionHeight = section.offsetHeight;
+
+      if (
+        window.scrollY >= sectionTop &&
+        window.scrollY < sectionTop + sectionHeight
+      ) {
+        currentSection = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active-nav-link");
+      if (link.getAttribute("href") === `#${currentSection}`) {
+        link.classList.add("active-nav-link");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", setActiveLink);
+  setActiveLink(); // Set initial state
+</script>
