@@ -1,7 +1,5 @@
 # 📌 Portafolio Web Personal
 
-![Portafolio Banner](frontend/readme/banner.png)
-
 ## 📖 Descripción General
 
 Este proyecto consiste en el desarrollo de un portafolio personal en formato **One Page**, donde se presenta información profesional, proyectos destacados y métodos de contacto. Está pensado como carta de presentación digital, adaptable a dispositivos móviles y con diseño minimalista.
@@ -50,9 +48,9 @@ Este proyecto consiste en el desarrollo de un portafolio personal en formato **O
 
 ## 📸 Capturas de Pantalla
 
-|             Inicio              | Proyectos                              | Contacto                             |
-| :-----------------------------: | :------------------------------------- | :----------------------------------- |
-| ![Inicio](docs\assets\hero.png) | ![Proyectos](docs\assets\projects.png) | ![Contacto](docs\assets\contact.png) |
+|              Inicio              | Proyectos                               | Contacto                              |
+| :------------------------------: | :-------------------------------------- | :------------------------------------ |
+| ![Inicio](/docs/assets/hero.png) | ![Proyectos](/docs/assets/projects.png) | ![Contacto](/docs/assets/contact.png) |
 
 ## 📦 Instalación y Uso
 
