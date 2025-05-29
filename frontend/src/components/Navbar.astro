@@ -9,7 +9,7 @@ const navItems = [
 
 <header
   id="navbar"
-  class="fixed top-0 left-0 right-0 z-50 py-6 transition-all duration-300"
+  class="fixed bg-dark top-0 left-0 right-0 z-50 py-6 transition-all duration-300"
 >
   <div class="container mx-auto px-4 flex justify-between items-center">
     <a href="#hero" class="text-xl font-spaceGrotesk font-bold text-white">
@@ -17,8 +17,13 @@ const navItems = [
         class="text-pastel-pink">{"}"}</span
       >
     </a>
-    <nav>
-      <ul class="flex space-x-6">
+    <nav class="flex">
+      <div class="burger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <ul class="nav-links">
         {
           navItems.map((item) => (
             <li>
@@ -48,12 +53,10 @@ const navItems = [
       start: "top top",
       end: "50 top",
       toggleActions: "play none none reverse",
-      onEnter: () =>
-        navbar.classList.add("bg-dark/70", "backdrop-blur-md", "py-4"),
+      onEnter: () => navbar.classList.add("bg-dark/70", "py-4"),
       onLeave: () => {},
       onEnterBack: () => {},
-      onLeaveBack: () =>
-        navbar.classList.remove("bg-dark/70", "backdrop-blur-md", "py-4"),
+      onLeaveBack: () => navbar.classList.remove("bg-dark/70", "py-4"),
     },
   });
 
@@ -87,4 +90,48 @@ const navItems = [
 
   window.addEventListener("scroll", setActiveLink);
   setActiveLink(); // Set initial state
+
+  // Toggle mobile menu
+  const burger = document.querySelector(".burger-menu");
+  const nav = document.querySelector(".nav-links");
+  const navLinksMobile = document.querySelectorAll(".nav-links li");
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    const isClickInside = nav.contains(e.target) || burger.contains(e.target);
+    if (!isClickInside && nav.classList.contains("active")) {
+      closeMenu();
+    }
+  });
+
+  function closeMenu() {
+    nav.classList.remove("active");
+    burger.classList.remove("active");
+    navLinksMobile.forEach((link) => {
+      link.style.animation = "";
+    });
+  }
+
+  burger.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent event from bubbling up to document
+
+    // Toggle Nav
+    const isOpening = !nav.classList.contains("active");
+    nav.classList.toggle("active");
+    burger.classList.toggle("active");
+
+    // Animate Links
+    navLinksMobile.forEach((link, index) => {
+      if (isOpening) {
+        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+      } else {
+        link.style.animation = "";
+      }
+    });
+  });
+
+  // Close menu when clicking on a nav link
+  navLinksMobile.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
 </script>
