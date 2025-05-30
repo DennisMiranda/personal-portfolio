@@ -1,5 +1,5 @@
 ---
-import "./src/styles/global.css";
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -19,19 +19,6 @@ const currentYear = new Date().getFullYear();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-
-    <!-- Email.js -->
-
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-    ></script>
-
-    <script type="text/javascript">
-      emailjs.init("699CoJ6zvxi0aA4V4");
-    </script>
-
-    <!-- S -->
 
     <meta name="description" content={description} />
     <meta name="author" content="Full Stack Developer" />
