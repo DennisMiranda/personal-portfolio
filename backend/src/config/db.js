@@ -10,6 +10,10 @@ const config = {
   database: process.env.DB_DATABASE,
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: false, // For Render's SSL certificate
+  },
+  keepAlive: true,
 };
 
 const pool = new Pool(config);
