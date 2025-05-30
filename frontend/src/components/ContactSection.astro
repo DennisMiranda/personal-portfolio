@@ -140,6 +140,7 @@ import { Icon } from "astro-icon/components";
 </section>
 
 <script>
+  import { API_URL } from "astro:env/client";
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -211,7 +212,7 @@ import { Icon } from "astro-icon/components";
       submitBtn.disabled = true;
 
       // Enviar formulario con emailJS
-      fetch("http://localhost:3001/api/contact", {
+      fetch(API_URL + "/api/contact", {
         method: "POST",
         headers: {
           "content-type": "application/json",
